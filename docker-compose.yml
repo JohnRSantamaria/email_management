@@ -9,3 +9,9 @@ services:
             - '8000:8000'
         volumes:
             - .:/app
+        networks: 
+            - nginx_proxy
+networks: 
+    nginx_proxy:
+        external: true
+        

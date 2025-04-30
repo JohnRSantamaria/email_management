@@ -8,3 +8,5 @@ __pycache__/
 .vscode/
 .git/
 .DS_Store
+*.exe
+*.whl
