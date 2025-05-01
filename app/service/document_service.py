@@ -16,7 +16,7 @@ def upload_to_dropbox(local_path: str, dropbox_path: str):
         )
 
     dbx = dropbox.Dropbox(access_token)
-    print(dbx.users_get_current_account())
+
     with open(local_path, "rb") as f:
         dbx.files_upload(f.read(), dropbox_path, mode=WriteMode("overwrite"))
 
