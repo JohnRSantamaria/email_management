@@ -3,6 +3,14 @@ from typing import List, Optional
 from datetime import datetime
 
 
+class Address(BaseModel):
+    address: str
+    city: str
+    state: str
+    country_code: str
+    postal_code: str
+
+
 class LineItem(BaseModel):
     description: str
     quantity: int
@@ -19,6 +27,7 @@ class InvoiceSchema(BaseModel):
     amount_untaxed: float
     tax_amount: float
     lines: Optional[List[LineItem]]
+    address: Optional[Address]
 
     @field_validator(
         "tax_identification_customer",

@@ -44,6 +44,16 @@ class InvoiceExtractor:
             tax_identification_supplier, valid_tax_identification
         )
 
+        address = {
+            "address": self.ocr_data.get("merchantAddress", {}).get("data", ""),
+            "city": self.ocr_data.get("merchantCity", {}).get("data", ""),
+            "state": self.ocr_data.get("merchantState", {}).get("data", ""),
+            "country_code": self.ocr_data.get("merchantCountryCode", {}).get(
+                "data", ""
+            ),
+            "postal_code": self.ocr_data.get("merchantPostalCode", {}).get("data", ""),
+        }
+
         return {
             "tax_identification_customer": tax_identification_customer,
             "tax_identification_supplier": tax_identification_supplier,
@@ -54,6 +64,7 @@ class InvoiceExtractor:
             "amount_untaxed": amount_untaxed,
             "tax_amount": tax_amount,
             "lines": lines,
+            "address": address,
         }
 
     def calculate_untaxed_amount(self, total: float, tax: float) -> float:
