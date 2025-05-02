@@ -1,4 +1,4 @@
-# app/settings.py
+# app\core\settings.py
 import os
 from pydantic_settings import BaseSettings
 
