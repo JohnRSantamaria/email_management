@@ -9,13 +9,20 @@ from app.core.settings import settings
 
 
 def upload_to_dropbox(local_path: str, dropbox_path: str):
-    access_token = settings.ACCESS_TOKEN_DROPBOX
-    if not access_token:
-        raise EnvironmentError(
-            "ACCESS_TOKEN_DROPBOX is not set in environment variables"
-        )
+    access_token = settings.DROPBOX_ACCESS_TOKEN
+    refresh_token = settings.DROPBOX_REFRESH_TOKEN
+    app_key = settings.DROPBOX_APP_KEY
+    app_secret = settings.DROPBOX_APP_SECRET
 
-    dbx = dropbox.Dropbox(access_token)
+    if not all([access_token, refresh_token, app_key, app_secret]):
+        raise EnvironmentError("Dropbox credentials are incomplete.")
+
+    dbx = dropbox.Dropbox(
+        oauth2_access_token=access_token,
+        oauth2_refresh_token=refresh_token,
+        app_key=app_key,
+        app_secret=app_secret,
+    )
 
     with open(local_path, "rb") as f:
         dbx.files_upload(f.read(), dropbox_path, mode=WriteMode("overwrite"))

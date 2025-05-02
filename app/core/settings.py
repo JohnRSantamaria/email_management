@@ -7,7 +7,11 @@ class Settings(BaseSettings):
     HOST: str = "0.0.0.0"
     PORT: int = 8080
     DEBUG: bool = True
-    ACCESS_TOKEN_DROPBOX: str
+
+    DROPBOX_ACCESS_TOKEN: str | None = None
+    DROPBOX_REFRESH_TOKEN: str | None = None
+    DROPBOX_APP_KEY: str | None = None
+    DROPBOX_APP_SECRET: str | None = None
 
     class Config:
         env_file = os.path.join(
