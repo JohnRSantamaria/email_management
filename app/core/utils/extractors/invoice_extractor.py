@@ -6,7 +6,7 @@ import difflib
 
 class InvoiceExtractor:
     def __init__(self, json_data: Dict[str, Any]):
-        self.ocr_data = json_data.get("ocr_data", {})
+        self.ocr_data = json_data
 
     def extract_main_fields(self) -> Dict[str, Any]:
         """Extract main fields from OCR data."""
